@@ -6,7 +6,7 @@ namespace AutoRepairJsonWersion.Components.Services;
 public class ClientProvider
 {
     const string PathAllClients = "AllClient.json";
-    private static List<Client?>? _newClients = [];
+    private static List<Client>? _newClients = [];
     
 
     protected void OnInitialized()
@@ -39,7 +39,7 @@ public class ClientProvider
         _newClients?.Remove(client);
         SaveFile();
     }
-    public static Client? GetUserByEmailStatic(string login)
+    public static Client? GetUserByEmailStatic(string login)//вот это мне кажется такооой колхоз, но пока хз как фиксить
     {
         return _newClients.FirstOrDefault(x=> x.ClientCredentials.Login == login);
     } 
@@ -47,11 +47,15 @@ public class ClientProvider
     {
         return _newClients.FirstOrDefault(x=> x.ClientCredentials.Login == login);
     } 
+    
+    
     public static IList<Client?>? ClientGetInfo()
     {  
         var json = File.ReadAllText(PathAllClients);
         _newClients = JsonConvert.DeserializeObject<List<Client>>(json);
-        return _newClients;
+        if (_newClients != null) 
+            return null;
+        return null;
     }
 
    

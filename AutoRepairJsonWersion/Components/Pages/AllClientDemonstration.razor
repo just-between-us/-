@@ -2,36 +2,35 @@
 @using AutoRepairJsonWersion.Components.Models
 @using AutoRepairJsonWersion.Components.Services
 @rendermode InteractiveServer
-<h3>
-    <div>
-        <button @onclick="Output"> Вывести чуйтсов</button>
-        <div>
-            <table class="table-bordered">
-                <tr>
-                    <th>Имя чуйтса</th>
-                    <th>Фамилия </th>
-                    <th>Логин шаути</th>
-                </tr>
-                @foreach (var item in Client)
-                {
-                    <tr>
-                        <td>@item.Name </td>
-                        <td>@item.LastName</td>
-                        <td>@item.ClientCredentials.Login</td>
-                        <td><button @onclick="() => ClientProvider.DeleteClient(ClientProvider.GetUserByEmailStatic(item.ClientCredentials.Login))">удалить</button></td>
-                    </tr>
-                }
-            </table>
-        </div>
-    </div>
-</h3>
+   
+<button @onclick="Output"> Вывести чуйтсов</button>
+<div>
+    <table class="table-bordered">
+        <tr>
+            <th>Имя чуйтса</th>
+            <th>Фамилия </th>
+            <th>Логин шаути</th>
+        </tr>
+        @foreach (var item in Client)
+        {
+            <tr>
+                <td>@item.Name </td>
+                <td>@item.LastName</td>
+                <td>@item.ClientCredentials.Login</td>
+                <td><button @onclick="() => ClientProvider.DeleteClient(ClientProvider.GetUserByEmailStatic(item.ClientCredentials.Login))">удалить</button></td>
+            </tr>
+        }
+    </table>
+</div>
+
 
 @code {
     static IList<Client?>? Client { get; set; } = new List<Client?>();
     
-    private static void Output()
+    private void Output()
     {
         Client = ClientProvider.ClientGetInfo();
     }
+    
     
 }

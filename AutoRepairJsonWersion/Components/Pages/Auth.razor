@@ -16,11 +16,12 @@
 @code {
     private string _login { get; set; }
     private string _password { get; set; }
-    public string _loginPageNextPath { get; set; } = "";
+    public string _loginPageNextPath { get; set; } = "counter";
 
     private void Do()
     {
         ClientLoginProvider.Login(_login, _password);
+        Navigationmanager.NavigateTo(_loginPageNextPath);
     }
 
 }
